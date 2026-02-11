@@ -38,37 +38,56 @@ body {
   overflow: hidden;
   transition: transform 0.1s;
 
-  /* from-blue-600 via-blue-400 to-blue-600 */
-  background: linear-gradient(to bottom, #2563eb, #60a5fa, #2563eb);
+  /* We add more stops to make the color transition feel "rounded" as it passes */
+  background: linear-gradient(to right,
+      #0F75BC 0%,
+      #0F75BC 20%,
+      #FFDB43 50%,
+      #0F75BC 80%,
+      #0F75BC 100%);
 
-  /* shadow-lg shadow-blue-500/40 */
-  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+  /* Larger size (300%) makes the "Gold" section look like a moving wave */
+  background-size: 300% auto;
+
+  /* Reduced from 4s to 1.5s for a fast run */
+  animation: color-flow 1.5s linear infinite;
+
+  box-shadow: 0 8px 25px rgba(50, 117, 188, 0.35);
 }
 
 .btn:active {
   transform: scale(0.95);
 }
 
-/* ─── RUNNING LIGHT: from-transparent via-white/60 to-transparent ─── */
+/* ─── FAST COLOR FLOW ─── */
+@keyframes color-flow {
+  0% {
+    background-position: 0% center;
+  }
+
+  100% {
+    /* Using -300% pulls the colors from left to right quickly */
+    background-position: -300% center;
+  }
+}
+
+/* ─── FAST SHINE EFFECT ─── */
 .shine {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right,
-      transparent,
-      rgba(255, 255, 255, 0.60),
-      transparent);
-  transform: translateX(-150%) skewX(-20deg);
-  animation: shine 0.8s linear infinite;
+  transform: translateX(-150%) skewX(-25deg);
+  /* Sped up to match the background */
+  animation: shine 1.2s linear infinite;
   pointer-events: none;
 }
 
 @keyframes shine {
   0% {
-    transform: translateX(-150%) skewX(-20deg);
+    transform: translateX(-150%) skewX(-25deg);
   }
 
   100% {
-    transform: translateX(150%) skewX(-20deg);
+    transform: translateX(150%) skewX(-25deg);
   }
 }
 
@@ -77,19 +96,25 @@ body {
   position: relative;
   z-index: 10;
   display: inline-block;
-  animation: pulse-text 2s ease-in-out infinite;
+  animation: pulse-text 1.5s ease-in-out infinite;
+  text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.4);
 }
 
 @keyframes pulse-text {
 
   0%,
   100% {
-    transform: scale(0.9);
+    transform: scale(1);
   }
 
   50% {
-    transform: scale(1.1);
+    transform: scale(1.08);
   }
+}
+
+/* ─── ENTRANCE ANIMATION ─── */
+.animate-scale-up {
+  animation: scale-up 0.8s ease-out forwards;
 }
 
 @keyframes scale-up {
@@ -102,8 +127,4 @@ body {
     transform: scale(1);
     opacity: 1;
   }
-}
-
-.animate-scale-up {
-  animation: scale-up 0.8s ease-out forwards;
 }

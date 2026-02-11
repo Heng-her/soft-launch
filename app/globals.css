@@ -50,7 +50,7 @@ body {
   background-size: 300% auto;
 
   /* Reduced from 4s to 1.5s for a fast run */
-  animation: color-flow 1.5s linear infinite;
+  animation: color-flow 3.5s linear infinite;
 
   box-shadow: 0 8px 25px rgba(50, 117, 188, 0.35);
 }

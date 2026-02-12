@@ -3,52 +3,84 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-x-hidden">
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full opacity-20  object-cover -z-10 pointer-events-none"
+      >
+        <source src="/bg/home.mp4" type="video/mp4" />
+      </video>
+      <div className="absolute inset-0  bg-[#004B87] backdrop-blur-sm -z-30" />
 
-      {/* Background GIF */}
-      <div
-        className="absolute inset-0 -z-20"
-        style={{
-          backgroundImage: "url('/bg/home.gif')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      />
+      <main className="relative z-10 flex flex-col items-center justify-center mt-20 md:mt-10 lg:mt-0 py-4 px-4 animate-scale-up">
+        <div className="w-full max-w-6xl flex flex-col items-center">
 
-      {/* Blue Overlay */}
-      <div className="absolute inset-0 bg-[#0b3c66]/60 -z-10" />
+          {/* Logos */}
+          <div className="flex gap-4 items-center justify-center mb-4 md:mb-8">
+            <div className="w-24 md:w-32 lg:w-32">
+              <Image src="/STC_logo.svg" alt="STC" width={220} height={110} className="w-full h-auto object-contain" priority />
+            </div>
+            <div className="w-24 md:w-32 lg:w-32">
+              <Image src="/48hr_logo.svg" alt="48hr" width={220} height={110} className="w-full h-auto object-contain" priority />
+            </div>
+          </div>
 
-      {/* Animated Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen py-8 animate-scale-up">
+          <h1 style={{ fontFamily: 'OdenaGlamour' }} className="text-6xl text-center text-white mb-6 tracking-[0.2em] uppercase drop-shadow-2xl">
+            SOFT <br /> LAUNCH
+          </h1>
 
-        {/* Image */}
-        <div className="relative w-full max-w-5xl h-[50vh] md:h-[60vh] lg:h-[70vh] mb-10 sm:mb-6">
-          <Image
-            src="/1Desktop.png"
-            alt="desktop"
-            fill
-            className="object-contain lg:block hidden"
-            priority
-          />
-          <Image
-            src="/1Mobile.png"
-            alt="mobile"
-            fill
-            className="object-contain lg:hidden block"
-            priority
-          />
+          <div className="text-center mb-6 max-w-2xl">
+            <p className="text-sm md:text-xl lg:text-2xl text-white/90 leading-relaxed ">
+              You are cordially invited to prevail the unsold rooms into <br className="hidden md:block" />
+              the unforgettable stay by 48hr Hotel Booking
+            </p>
+          </div>
+
+          <div className="w-full max-w-2xl flex items-center justify-between mb-8">
+
+            {/* Left - Day */}
+            <div className="flex-1 mr-2 border-t-2 border-b-2 border-[#FCCD03] py-2 md:py-4">
+              <p className="text-[10px] sm:text-lg md:text-2xl lg:text-3xl font-semibold text-white text-center uppercase tracking-tighter md:tracking-widest">
+                Saturday
+              </p>
+            </div>
+
+            {/* Center - Date */}
+            <div className="flex flex-col items-center justify-center shrink-0 min-w-20 md:min-w-37.5">
+              <p className="text-xs lg:text-md lg:-mb-5 md:text-sm tracking-[0.2em] md:tracking-[0.4em] text-white/90 uppercase">
+                February
+              </p>
+              <h2 className="text-6xl sm:text-2xl md:text-6xl lg:text-9xl font-bold text-[#FCCD03] leading-none drop-shadow-lg">
+                21
+              </h2>
+              <p className="text-xs sm:text-2xl text-white/90 md:text-xl tracking-[0.2em] md:tracking-[0.4em] uppercase">
+                2026
+              </p>
+            </div>
+
+            {/* Right - Time */}
+            <div className="flex-1 border-t-2 border-b-2 border-[#FCCD03] py-2 md:py-4">
+              <p className="text-[10px] sm:text-lg md:text-2xl lg:text-3xl font-semibold text-white text-center uppercase tracking-tighter md:tracking-widest">
+                6:00 PM
+              </p>
+            </div>
+          </div>
+
+          {/* CTA Button */}
+          <Link href="/adenda">
+            <button className="btn relative overflow-hidden px-12 py-4 bg-[#FCCD03] text-black font-bold uppercase tracking-widest rounded-sm active:scale-95">
+              <span className="relative z-10 pulse-text">View Agenda</span>
+              <div className="absolute inset-0 bg-white/20 -translate-x-full transition-transform duration-500 skew-x-12"></div>
+            </button>
+          </Link>
+
+
         </div>
-
-        {/* Button */}
-        <Link href="/adenda">
-          <button className="btn">
-            <span className="shine"></span>
-            <span className="pulse-text">View Agenda</span>
-          </button>
-        </Link>
-      </div>
+      </main>
     </div>
-
   );
 }

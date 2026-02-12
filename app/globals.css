@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'OdenaGlamour';
+  src: url('/font/OdenaGlamour-BF6625f66aead7f.woff2') format('woff2'),
+    url('/font/OdenaGlamour-BF6625f66aead7f.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -14,22 +24,23 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg-color-light: rgba(15, 117, 188, 0.18);
+    /* Modify this as per your need */
+    --bg-color-dark: rgba(15, 117, 188, 0.18);
+    /* Same rgba for consistency */
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
 }
-
 .btn {
   position: relative;
   padding: 12px 32px;
   width: 240px;
-  border-radius: 12px;
+  border-radius: 50px;
   font-weight: 600;
   font-size: 1rem;
   color: #ffffff;
@@ -64,7 +75,6 @@ body {
   0% {
     background-position: 0% center;
   }
-
   100% {
     /* Using -300% pulls the colors from left to right quickly */
     background-position: -300% center;
@@ -96,8 +106,8 @@ body {
   position: relative;
   z-index: 10;
   display: inline-block;
-  animation: pulse-text 1.5s ease-in-out infinite;
-  text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.4);
+  animation: pulse-text 1.9s ease-in-out infinite;
+  /* text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.4); */
 }
 
 @keyframes pulse-text {
@@ -108,9 +118,10 @@ body {
   }
 
   50% {
-    transform: scale(1.08);
+    transform: scale(1.2);
   }
 }
+
 
 /* ─── ENTRANCE ANIMATION ─── */
 .animate-scale-up {

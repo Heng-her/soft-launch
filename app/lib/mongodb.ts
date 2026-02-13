@@ -6,23 +6,37 @@ const uri = process.env.MONGODB_URI;
 if (!uri) {
   throw new Error("Please add your Mongo URI to .env (MONGODB_URI).");
 }
-const options: MongoClientOptions = {};
+const options: MongoClientOptions = {
+  tls: true,
+  family: 4,
+  serverSelectionTimeoutMS: 10_000,
+  connectTimeoutMS: 10_000,
+};
 
 declare global {
+  var _mongoClient: MongoClient | undefined;
   var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
-let clientPromise: Promise<MongoClient>;
-
-if (process.env.NODE_ENV === "development") {
-  if (!global._mongoClientPromise) {
-    const client = new MongoClient(uri, options);
-    global._mongoClientPromise = client.connect();
-  }
-  clientPromise = global._mongoClientPromise;
-} else {
+function createClientPromise() {
   const client = new MongoClient(uri, options);
-  clientPromise = client.connect();
+  return client.connect().then((connectedClient) => {
+    global._mongoClient = connectedClient;
+    return connectedClient;
+  });
 }
 
-export default clientPromise;
+export async function getMongoClient() {
+  if (global._mongoClient) return global._mongoClient;
+
+  if (!global._mongoClientPromise) {
+    global._mongoClientPromise = createClientPromise().catch((error) => {
+      global._mongoClientPromise = undefined;
+      throw error;
+    });
+  }
+
+  return global._mongoClientPromise;
+}
+
+export default getMongoClient;

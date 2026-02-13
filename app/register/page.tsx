@@ -94,7 +94,9 @@ export default function Contact() {
                 body: JSON.stringify(form satisfies ContactForm),
             });
 
-            const data: { error?: string } = await response.json().catch(() => ({}));
+            const data: { error?: string; details?: string } = await response.json().catch(
+                () => ({}),
+            );
 
             if (response.ok) {
                 setFeedback({ type: "success", message: "Message sent successfully!" });
@@ -122,7 +124,7 @@ export default function Contact() {
 
             setFeedback({
                 type: "error",
-                message: data.error || "Something went wrong.",
+                message: data.details ? `${data.error || "Something went wrong."} ${data.details}` : data.error || "Something went wrong.",
             });
         } catch {
             setFeedback({ type: "error", message: "Network error, please try again." });

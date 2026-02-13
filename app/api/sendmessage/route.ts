@@ -2,19 +2,20 @@
 import { NextResponse } from "next/server";
 import crypto from "crypto";
 import { z } from "zod";
-import clientPromise from "../../lib/mongodb";
+import { MongoServerSelectionError } from "mongodb";
+import getMongoClient from "../../lib/mongodb";
 
 export const runtime = "nodejs"; // MongoDB driver needs Node runtime
 
 const BodySchema = z.object({
   fullName: z.string().trim().min(2, "Full name is required").max(100),
+  email: z.string().trim().email("Invalid email address").max(254),
   phoneNumber: z
     .string()
     .trim()
     .min(5, "Phone number is required")
     .max(30)
     .regex(/^\+?[0-9\s()-]+$/, "Invalid phone number"),
-  company: z.string().trim().max(120).optional().or(z.literal("")),
 });
 
 function getClientIp(req: Request) {
@@ -26,6 +27,16 @@ function getClientIp(req: Request) {
 
 function sha256(input: string) {
   return crypto.createHash("sha256").update(input).digest("hex");
+}
+
+function getErrorDetails(err: unknown) {
+  if (err instanceof MongoServerSelectionError) {
+    const parts = [err.message];
+    if (err.cause instanceof Error) parts.push(err.cause.message);
+    return parts.join(" | ");
+  }
+  if (err instanceof Error) return err.message;
+  return String(err);
 }
 
 export async function POST(req: Request) {
@@ -44,9 +55,8 @@ export async function POST(req: Request) {
     const ipHash = sha256(ip);
     const ua = req.headers.get("user-agent") ?? "";
 
-    const client = await clientPromise;
-    const dbName = process.env.MONGODB_DB || "app";
-    const db = client.db(dbName);
+    const client = await getMongoClient();
+    const db = process.env.MONGODB_DB ? client.db(process.env.MONGODB_DB) : client.db();
     const col = db.collection("contact_requests");
 
     // ✅ basic server-side rate limit: 1 request / 30 seconds per IP
@@ -70,6 +80,20 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ ok: true }, { status: 200 });
   } catch (err) {
-    return NextResponse.json({ error: "Server error" + err }, { status: 500 });
+    console.error("POST /api/sendmessage failed:", err);
+
+    if (err instanceof MongoServerSelectionError) {
+      const details = process.env.NODE_ENV !== "production" ? getErrorDetails(err) : undefined;
+      return NextResponse.json(
+        {
+          error:
+            "Database connection failed. Check Atlas IP access list, MongoDB URI, and TLS/network settings.",
+          ...(details ? { details } : {}),
+        },
+        { status: 500 },
+      );
+    }
+
+    return NextResponse.json({ error: "Server error. Please try again." }, { status: 500 });
   }
 }

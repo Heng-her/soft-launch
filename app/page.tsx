@@ -3,6 +3,7 @@ import Link from "next/link";
 import HeroTitle from "./components/HeroTitle";
 
 export default function Home() {
+  console.log("Home");
   return (
     <div className="relative min-h-screen overflow-x-hidden">
       <video

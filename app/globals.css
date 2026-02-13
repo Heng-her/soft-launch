@@ -25,9 +25,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --bg-color-light: rgba(15, 117, 188, 0.18);
-    /* Modify this as per your need */
     --bg-color-dark: rgba(15, 117, 188, 0.18);
-    /* Same rgba for consistency */
   }
 }
 

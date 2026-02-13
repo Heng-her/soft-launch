@@ -25,7 +25,7 @@ export default function Agenda() {
 
       {/* Back Button Top-Left */}
       <button
-        onClick={() => router.back() ?? router.push("/")}
+        onClick={() => router.push("/")}
         className="absolute top-4 left-4 w-10 h-10 flex items-center justify-center bg-white hover:bg-white/80 rounded-full shadow-lg transition-all duration-300 z-50" >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -48,18 +48,25 @@ export default function Agenda() {
             src="/3Desktop.png"
             alt="desktop"
             fill
+            loading="eager"
+            quality={75}
             draggable={false}
             className="object-contain lg:block hidden pointer-events-none"
             priority
+            sizes="(max-width: 1024px) 100vw, 1024px"
           />
+
           <Image
             src="/3Mobile.png"
-            alt="mobile"
+            alt="desktop"
             fill
+            loading="eager"
+            quality={75}
             draggable={false}
             className="object-contain lg:hidden block pointer-events-none"
-            priority
+            sizes="(max-width: 1024px) 100vw, 1024px"
           />
+
         </div>
         <p className="text-center text-xs lg:text-xl w-72 lg:w-full text-white" style={{ userSelect: 'none' }}>
           Note: The program schedule is subject to change or cancellation without prior notice

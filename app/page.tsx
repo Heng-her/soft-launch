@@ -33,8 +33,8 @@ export default function Home() {
           <HeroTitle />
 
           <div className="text-center mb-6 max-w-2xl">
-            <p className="text-sm md:text-xl lg:text-2xl text-white/90 leading-relaxed select-none">
-              You are cordially invited to prevail the unsold rooms into <br className="hidden md:block" />
+            <p className="text-sm md:text-xl lg:text-2xl text-white leading-relaxed select-none">
+              You are cordially invited to unveil the unsold rooms into <br className="hidden md:block" />
               the unforgettable stay by 48hr Hotel Booking
             </p>
           </div>
@@ -49,20 +49,20 @@ export default function Home() {
             </div>
 
             {/* Center - Date */}
-            <div className="flex flex-col items-center justify-center shrink-0 min-w-20 md:min-w-37.5 select-none">
-              <p className="text-xs lg:text-md lg:-mb-5 md:text-sm tracking-[0.2em] md:tracking-[0.4em] text-white/90 uppercase">
+            <div className="flex flex-col items-center justify-center text-center shrink-0 min-w-20 md:min-w-37.5 select-none">
+              <p className="text-xs lg:text-md lg:-mb-5 md:text-sm tracking-[0.2em] md:tracking-[0.4em] text-white uppercase text-center">
                 February
               </p>
-              <h2 className="text-6xl sm:text-2xl md:text-6xl lg:text-9xl font-bold text-[#FCCD03] leading-none drop-shadow-lg">
+              <h2 className="text-6xl sm:text-2xl md:text-6xl lg:text-9xl font-bold text-[#FCCD03] leading-none drop-shadow-lg text-center">
                 21
               </h2>
-              <p className="text-xs sm:text-2xl text-white/90 md:text-xl tracking-[0.2em] md:tracking-[0.4em] uppercase">
+              <p className="text-xs sm:text-2xl text-white md:text-xl tracking-[0.2em] md:tracking-[0.4em] uppercase text-center">
                 2026
               </p>
             </div>
 
             {/* Right - Time */}
-            <div className="flex-1 border-t-2 border-b-2 border-[#FCCD03] py-2 md:py-4">
+            <div className="flex-1 border-t-2 border-b-2 border-[#FCCD03] py-2 md:py-4 text-center">
               <p className="text-[10px] sm:text-lg md:text-2xl lg:text-3xl font-semibold text-white text-center uppercase tracking-tighter md:tracking-widest select-none">
                 6:00 PM
               </p>

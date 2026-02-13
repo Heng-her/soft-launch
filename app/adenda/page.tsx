@@ -63,6 +63,7 @@ export default function Agenda() {
             draggable={false}
             className="object-contain lg:hidden block pointer-events-none"
             priority
+            sizes="100vw"
           />
         </div>
         <p className="text-center text-xs lg:text-xl w-72 lg:w-full text-white select-none">

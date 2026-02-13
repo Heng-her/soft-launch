@@ -21,7 +21,7 @@ export default function Agenda() {
       </video>
 
       {/* Blue Overlay */}
-      <div className="absolute inset-0 bg-[#003866] -z-20" />
+      <div className="absolute inset-0 bg-[#002f55] -z-20" />
 
       {/* Back Button Top-Left */}
       <button

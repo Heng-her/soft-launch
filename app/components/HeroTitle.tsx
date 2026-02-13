@@ -24,8 +24,6 @@ export default function HeroTitle() {
             if (!mounted) return;
             if (faces.length > 0) setFontLoaded(true);
             else {
-              // try one quick retry — sometimes Safari resolves with 0 faces on
-              // the first call due to timing.
               return fonts.load('1em "OdenaGlamour"').then((faces2) => {
                 if (!mounted) return;
                 if (faces2.length > 0) setFontLoaded(true);
@@ -56,22 +54,17 @@ export default function HeroTitle() {
 
   const waiting = !fontLoaded && !timedOut;
 
-  // Show heading: animate in when the font loads; show immediately on timeout.
-  // Avoid synchronous setState inside effects — defer updates to the next frame/tick.
   useEffect(() => {
-    // If font loaded, animate in (deferred to rAF)
     if (fontLoaded) {
       requestAnimationFrame(() => setShowHeading(true));
       return;
     }
 
-    // If we timed out before the font loaded, show immediately but defer to next tick
     if (timedOut) {
       const id = window.setTimeout(() => setShowHeading(true), 0);
       return () => window.clearTimeout(id);
     }
 
-    // While waiting keep heading hidden — initial state is already false, so no setState here.
   }, [fontLoaded, timedOut]);
 
   return (
@@ -79,7 +72,6 @@ export default function HeroTitle() {
       {waiting ? (
         <div className="w-full max-w-xl h-22 md:h-30 flex items-center justify-center">
           <div className="skeleton-title w-72 md:w-96 h-12 md:h-20 rounded-full" aria-hidden />
-          {/* Hidden font reference to force iOS/Safari to download the font while we show the skeleton. */}
           <span
             aria-hidden
             style={{
@@ -97,7 +89,7 @@ export default function HeroTitle() {
       ) : (
         <h1
           style={{ fontFamily: fontLoaded ? "OdenaGlamour" : undefined }}
-          className={`text-5xl text-center text-white mb-6 tracking-[0.2em] uppercase drop-shadow-2xl transition-opacity duration-500 select-none ${
+          className={`text-5xl font-medium text-center text-white mb-6 tracking-[0.2em] uppercase drop-shadow-2xl transition-opacity duration-500 select-none ${
             showHeading ? "opacity-100" : "opacity-0"
           }`}
         >

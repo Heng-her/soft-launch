@@ -48,7 +48,6 @@ export default function Agenda() {
             src="/3Desktop.png"
             alt="desktop"
             fill
-            loading="eager"
             quality={75}
             draggable={false}
             className="object-contain lg:block hidden pointer-events-none"
@@ -60,13 +59,11 @@ export default function Agenda() {
             src="/3Mobile.png"
             alt="desktop"
             fill
-            loading="eager"
             quality={75}
             draggable={false}
             className="object-contain lg:hidden block pointer-events-none"
             sizes="(max-width: 1024px) 100vw, 1024px"
           />
-
         </div>
         <p className="text-center text-xs lg:text-xl w-72 lg:w-full text-white" style={{ userSelect: 'none' }}>
           Note: The program schedule is subject to change or cancellation without prior notice

@@ -2,10 +2,14 @@
 import "server-only";
 import { MongoClient, type MongoClientOptions } from "mongodb";
 
-const uri = process.env.MONGODB_URI;
-if (!uri) {
-  throw new Error("Please add your Mongo URI to .env (MONGODB_URI).");
+function getMongoUri(): string {
+  const value = process.env.MONGODB_URI;
+  if (!value) {
+    throw new Error("Please add your Mongo URI to .env (MONGODB_URI).");
+  }
+  return value;
 }
+const uri = getMongoUri();
 const options: MongoClientOptions = {
   tls: true,
   family: 4,

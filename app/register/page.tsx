@@ -135,7 +135,7 @@ export default function Contact() {
 
 
     return (
-        <div className="w-full bg-white">
+        <div className="w-full bg-[#0F75BC] py-10 lg:py-20 px-4 min-h-screen flex items-center justify-center">
             <section
                 id="contact"
                 className="flex flex-col items-center px-4 py-8 text-center lg:py-16 lg:px-6 bg-background lg:rounded-t-custom rounded-t-custom_phone"

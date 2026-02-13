@@ -25,7 +25,7 @@ export default function Agenda() {
 
       {/* Back Button Top-Left */}
       <button
-        onClick={() => router.back() ?? router.push("/")}
+        onClick={() => router.push("/")}
         className="absolute top-4 left-4 w-10 h-10 flex items-center justify-center bg-white hover:bg-white/80 rounded-full shadow-lg transition-all duration-300 z-50" >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -48,21 +48,22 @@ export default function Agenda() {
             src="/3Desktop.png"
             alt="desktop"
             fill
+            quality={75}
             draggable={false}
             className="sm:object-contain lg:block hidden pointer-events-none"
             priority
-            quality={100}
-            sizes="(min-width: 1024px) 900px, 100vw"
+            sizes="(max-width: 1024px) 100vw, 1024px"
           />
+
           <Image
             src="/3Mobile.png"
-            alt="mobile"
+            alt="desktop"
             fill
+            quality={75}
             draggable={false}
-            className="sm:object-contain lg:hidden block pointer-events-none"
+            className="object-contain lg:hidden block pointer-events-none"
             priority
-            quality={100}
-            sizes="(max-width: 1023px) 600px, 100vw"
+            sizes="100vw"
           />
         </div>
         <p className="text-center text-xs lg:text-xl w-72 lg:w-full text-white select-none">

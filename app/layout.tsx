@@ -26,6 +26,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <head>
+        {/* Preload images for home page */}
+        <link rel="preload" href="/STC_logo.svg" as="image" fetchPriority="high" />
+        <link rel="preload" href="/48hr_logo.svg" as="image" fetchPriority="high" />
         {/* Preload agenda images used on first navigation to /adenda */}
         <link rel="preload" href="/3Desktop.png" as="image" media="(min-width: 1024px)" fetchPriority="high" />
         <link rel="preload" href="/3Mobile.png" as="image" media="(max-width: 1023px)" fetchPriority="high" />

@@ -21,7 +21,7 @@ export default function Agenda() {
       </video>
 
       {/* Blue Overlay */}
-      <div className="absolute inset-0 bg-[#004B87] -z-20" />
+      <div className="absolute inset-0 bg-[#003866] -z-20" />
 
       {/* Back Button Top-Left */}
       <button
@@ -42,15 +42,15 @@ export default function Agenda() {
       </button>
 
       {/* Page Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen py-8">
-        <div className="relative w-full max-w-6xl h-[50vh] md:h-[60vh] lg:h-[70vh] mb-10 sm:mb-6 select-none">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen animate-scale-up">
+        <div className="relative w-full max-w-6xl h-[50vh] md:h-[60vh] lg:h-[70vh] mb-10 sm:mb-6 select-none px-6">
           <Image
             src="/3Desktop.png"
             alt="desktop"
             fill
             quality={75}
             draggable={false}
-            className="object-contain lg:block hidden pointer-events-none"
+            className="sm:object-contain lg:block hidden pointer-events-none"
             priority
             sizes="(max-width: 1024px) 100vw, 1024px"
           />
@@ -62,10 +62,10 @@ export default function Agenda() {
             quality={75}
             draggable={false}
             className="object-contain lg:hidden block pointer-events-none"
-            sizes="(max-width: 1024px) 100vw, 1024px"
+            priority
           />
         </div>
-        <p className="text-center text-xs lg:text-xl w-72 lg:w-full text-white" style={{ userSelect: 'none' }}>
+        <p className="text-center text-xs lg:text-xl w-72 lg:w-full text-white select-none">
           Note: The program schedule is subject to change or cancellation without prior notice
         </p>
 

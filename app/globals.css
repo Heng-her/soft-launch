@@ -36,6 +36,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
 }
+
 .btn {
   position: relative;
   padding: 12px 32px;
@@ -75,6 +76,7 @@ body {
   0% {
     background-position: 0% center;
   }
+
   100% {
     /* Using -300% pulls the colors from left to right quickly */
     background-position: -300% center;

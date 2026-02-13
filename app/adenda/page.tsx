@@ -43,7 +43,7 @@ export default function Agenda() {
 
       {/* Page Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen animate-scale-up">
-        <div className="relative w-full max-w-6xl h-[50vh] md:h-[60vh] lg:h-[70vh] mb-10 sm:mb-6 select-none px-6">
+        <div className="relative w-full max-w-6xl h-[50vh] md:h-[60vh] lg:h-[70vh] mb-10 sm:mb-6 select-none">
           <Image
             src="/3Desktop.png"
             alt="desktop"

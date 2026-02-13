@@ -17,7 +17,7 @@ export default function Home() {
       <div className="absolute inset-0  bg-[#002f55] backdrop-blur-sm -z-30" />
 
       <main className="relative z-10 flex flex-col items-center justify-center md:mt-10 lg:mt-0 py-4 px-4 animate-scale-up">
-        <div className="w-full max-w-6xl flex flex-col items-center justify-center mt-22">
+        <div className="w-full max-w-6xl flex flex-col items-center justify-center mt-19">
 
           {/* Logos */}
           <div className="flex gap-4 items-center justify-center mb-4 md:mb-8">
@@ -35,7 +35,7 @@ export default function Home() {
           <div className="text-center mb-6 max-w-2xl">
             <p className="text-sm md:text-xl lg:text-2xl text-white leading-relaxed select-none">
               You are cordially invited to unveil the unsold rooms into <br className="hidden md:block" />
-              the unforgettable stay by 48hr Hotel Booking
+              the unforgettable stay by 48hr Hotel Booking.
             </p>
           </div>
 
@@ -43,27 +43,27 @@ export default function Home() {
 
             {/* Left - Day */}
             <div className="flex-1 mr-2 border-t-2 border-b-2 border-[#FCCD03] py-2 md:py-4">
-              <p className="text-[10px] sm:text-lg md:text-2xl lg:text-3xl font-semibold text-white text-center uppercase tracking-tighter md:tracking-widest select-none">
+              <p className="text-sm sm:text-lg md:text-2xl lg:text-3xl font-medium text-white text-center uppercase tracking-wide select-none">
                 Saturday
               </p>
             </div>
 
             {/* Center - Date */}
             <div className="flex flex-col items-center justify-center text-center shrink-0 min-w-20 md:min-w-37.5 select-none">
-              <p className="text-xs lg:text-md lg:-mb-5 md:text-sm tracking-[0.2em] md:tracking-[0.4em] text-white uppercase text-center">
+              <p className="text-sm lg:text-md lg:-mb-5 md:text-sm tracking-[0.2em] md:tracking-[0.4em] text-white uppercase text-center">
                 February
               </p>
-              <h2 className="text-6xl sm:text-2xl md:text-6xl mt-2 lg:text-9xl font-bold text-[#FCCD03] leading-none drop-shadow-lg text-center">
+              <h2 className="text-6xl sm:text-2xl md:text-6xl pb-2 lg:text-9xl font-bold text-[#FCCD03] leading-none drop-shadow-lg text-center">
                 21
               </h2>
-              <p className="text-xs sm:text-2xl text-white md:text-xl tracking-[0.2em] md:tracking-[0.4em] uppercase text-center mr-2.5">
+              <p className="text-sm sm:text-2xl text-white md:text-xl tracking-[0.2em] md:tracking-[0.4em] uppercase text-center mr-1">
                 2026
               </p>
             </div>
 
             {/* Right - Time */}
             <div className="flex-1 border-t-2 border-b-2 border-[#FCCD03] py-2 md:py-4 text-center">
-              <p className="text-[10px] sm:text-lg md:text-2xl lg:text-3xl font-semibold text-white text-center uppercase tracking-tighter md:tracking-widest select-none">
+              <p className="text-sm sm:text-lg md:text-2xl lg:text-3xl font-medium text-white text-center uppercase tracking-wide select-none">
                 6:00 PM
               </p>
             </div>

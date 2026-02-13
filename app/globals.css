@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'OdenaGlamour';
-  src: url('/font/OdenaGlamour-BF6625f66aead7f.woff2') format('woff2'),
-    url('/font/OdenaGlamour-BF6625f66aead7f.otf') format('opentype');
+  font-family: "OdenaGlamour";
+  src:
+    url("/font/OdenaGlamour-BF6625f66aead7f.woff2") format("woff2"),
+    url("/font/OdenaGlamour-BF6625f66aead7f.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
-
 
 :root {
   --background: #ffffff;
@@ -36,36 +36,75 @@ body {
 }
 .btn {
   position: relative;
-  padding: 16px 38px;
-  width: 240px;
+  padding: 14px 38px;
   border-radius: 50px;
-  font-weight: 600;
-  font-size: 1rem;
   color: #ffffff;
-  border: none;
+  /* border: none; */
   cursor: pointer;
   overflow: hidden;
   transition: transform 0.1s;
 
   /* We add more stops to make the color transition feel "rounded" as it passes */
-  background: linear-gradient(to right,
-      #0F75BC 0%,
-      #0F75BC 20%,
-      #FFDB43 50%,
-      #0F75BC 80%,
-      #0F75BC 100%);
+  background: linear-gradient(
+    to right,
+    #0f74bc39 0%,
+    #0f74bc39 20%,
+    #ffffff95 50%,
+    #0f74bc39 80%,
+    #0f74bc39 100%
+  );
 
   /* Larger size (300%) makes the "Gold" section look like a moving wave */
   background-size: 300% auto;
-
+  border: 2px solid #ffffff;
   /* Reduced from 4s to 1.5s for a fast run */
-  animation: color-flow 3.5s linear infinite;
-
-  box-shadow: 0 8px 25px rgba(50, 117, 188, 0.35);
+  animation: color-flow 6s linear infinite;
 }
 
 .btn:active {
   transform: scale(0.95);
+}
+
+.btn-2 {
+  position: relative;
+  padding: 14px 38px;
+  border-radius: 50px;
+  color: #ffffff;
+  /* border: none; */
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.1s;
+
+  /* We add more stops to make the color transition feel "rounded" as it passes */
+  background: linear-gradient(
+    to right,
+    #0f74bc39 0%,
+    #0f74bc39 20%,
+    #fdde1371 50%,
+    #0f74bc39 80%,
+    #0f74bc39 100%
+  );
+
+  /* Larger size (300%) makes the "Gold" section look like a moving wave */
+  background-size: 300% auto;
+  border: 2px solid #D4B903;
+  /* Reduced from 4s to 1.5s for a fast run */
+  animation: color-flow-two 8s linear infinite;
+}
+
+.btn-2:active {
+  transform: scale(0.95);
+}
+
+/* ─── FAST COLOR FLOW ─── */
+@keyframes color-flow-two {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    /* Using -300% pulls the colors from left to right quickly */
+    background-position: 300% center;
+  }
 }
 
 /* ─── FAST COLOR FLOW ─── */
@@ -104,12 +143,19 @@ body {
   position: relative;
   z-index: 10;
   display: inline-block;
-  animation: pulse-text 1.9s ease-in-out infinite;
+  animation: pulse-text 2s ease-in-out infinite;
+  /* text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.4); */
+}
+
+.pulse-text-two {
+  position: relative;
+  z-index: 10;
+  display: inline-block;
+  animation: pulse-text 3s ease-in-out infinite;
   /* text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.4); */
 }
 
 @keyframes pulse-text {
-
   0%,
   100% {
     transform: scale(1);
@@ -119,7 +165,6 @@ body {
     transform: scale(1.2);
   }
 }
-
 
 /* ─── ENTRANCE ANIMATION ─── */
 .animate-scale-up {
@@ -140,16 +185,24 @@ body {
 
 /* small skeleton for hero title while font loads */
 .skeleton-title {
-  background: linear-gradient(90deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.06) 100%);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
   animation: shimmer 1.2s linear infinite;
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
-
 
 /* Phone Input Custom Styles */
 .PhoneInput {

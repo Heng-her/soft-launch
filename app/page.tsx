@@ -11,22 +11,35 @@ export default function Home() {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full opacity-20  object-cover -z-10 pointer-events-none"
+        className="absolute inset-0 w-full h-full opacity-20 object-cover -z-10 pointer-events-none"
       >
         <source src="/bg/home.mp4" type="video/mp4" />
       </video>
       <div className="absolute inset-0  bg-[#002f55] backdrop-blur-sm -z-30" />
 
       <main className="relative z-10 flex flex-col items-center justify-center md:mt-10 lg:mt-0 py-4 px-4 animate-scale-up">
-        <div className="w-full max-w-6xl flex flex-col items-center justify-center mt-19">
-
+        <div className="w-full max-w-6xl flex flex-col items-center justify-center mt-12">
           {/* Logos */}
           <div className="flex gap-4 items-center justify-center mb-4 md:mb-8">
             <div className="w-36 md:w-38 lg:w-38">
-              <Image src="/STC_logo.svg" alt="STC" width={220} height={110} className="w-full h-auto object-contain" priority />
+              <Image
+                src="/STC_logo.svg"
+                alt="STC"
+                width={220}
+                height={110}
+                className="w-full h-auto object-contain"
+                priority
+              />
             </div>
             <div className="w-36 md:w-38 lg:w-38">
-              <Image src="/48hr_logo.svg" alt="48hr" width={220} height={110} className="w-full h-auto object-contain" priority />
+              <Image
+                src="/48hr_logo.svg"
+                alt="48hr"
+                width={220}
+                height={110}
+                className="w-full h-auto object-contain"
+                priority
+              />
             </div>
           </div>
 
@@ -35,13 +48,13 @@ export default function Home() {
 
           <div className="text-center mb-6 max-w-2xl">
             <p className="text-sm md:text-xl lg:text-2xl text-white leading-relaxed select-none">
-              You are cordially invited to unveil the unsold rooms into <br className="hidden md:block" />
+              You are cordially invited to unveil the unsold rooms into{" "}
+              <br className="hidden md:block" />
               the unforgettable stay by 48hr Hotel Booking.
             </p>
           </div>
 
           <div className="w-full max-w-2xl flex items-center justify-between mb-8">
-
             {/* Left - Day */}
             <div className="flex-1 mr-2 border-t-2 border-b-2 border-[#FCCD03] py-2 md:py-4">
               <p className="text-sm sm:text-lg md:text-2xl lg:text-3xl font-medium text-white text-center uppercase tracking-wide select-none">
@@ -71,14 +84,22 @@ export default function Home() {
           </div>
 
           {/* CTA Button */}
-          <Link href="/adenda">
-            <button className="btn relative overflow-hidden bg-[#FCCD03] text-black font-bold uppercase tracking-widest rounded-sm active:scale-95 select-none">
-              <span className="relative z-10 pulse-text">View Agenda</span>
-              <div className="absolute inset-0 bg-white/20 -translate-x-full transition-transform duration-500 skew-x-12"></div>
-            </button>
-          </Link>
-
-
+          <div className="flex flex-col items-center justify-center gap-y-4 w-full">
+            <Link href="/adenda" className="w-full">
+              <button className="btn-2 w-full py-3.5 overflow-hidden font-semibold uppercase tracking-widest select-none">
+                <span className="relative z-10 pulse-text-two">View Agenda</span>
+                <div className="absolute inset-0 bg-white/20 -translate-x-full transition-transform duration-500 skew-x-12"></div>
+              </button>
+            </Link>
+            <Link href="/register" className="w-full">
+              <button className="btn relative w-full py-3.5 overflow-hidden font-semibold uppercase tracking-widest select-none">
+                <span className="relative z-10 pulse-text">
+                  Join Invitation
+                </span>
+                <div className="absolute inset-0 bg-[#0F74BC]/20 -translate-x-full transition-transform duration-500 skew-x-12"></div>
+              </button>
+            </Link>
+          </div>
         </div>
       </main>
     </div>

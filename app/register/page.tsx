@@ -21,7 +21,9 @@ function getCooldownSecondsFromResponse(
   response: Response,
   bodyCooldownSeconds?: number,
 ) {
-  const retryAfterSeconds = toPositiveInteger(response.headers.get("retry-after"));
+  const retryAfterSeconds = toPositiveInteger(
+    response.headers.get("retry-after"),
+  );
   if (retryAfterSeconds) return retryAfterSeconds;
 
   const windowSeconds = toPositiveInteger(
@@ -139,9 +141,11 @@ export default function Contact() {
         body: JSON.stringify(form satisfies ContactForm),
       });
 
-      const data: { error?: string; details?: string; cooldownSeconds?: number } = await response
-        .json()
-        .catch(() => ({}));
+      const data: {
+        error?: string;
+        details?: string;
+        cooldownSeconds?: number;
+      } = await response.json().catch(() => ({}));
 
       if (response.ok) {
         const cooldownSeconds = getCooldownSecondsFromResponse(
@@ -192,7 +196,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="w-full bg-neutral-50 min-h-screen flex items-center justify-center">
+    <div className="w-full bg-linear-to-b from-[#001c33] to-[#095693] min-h-screen flex items-center justify-center relative overflow-x-hidden">
       <Toaster
         position="top-center"
         toastOptions={{
@@ -202,14 +206,34 @@ export default function Contact() {
           },
         }}
       />
-      <section className="flex flex-col items-center p-4 text-center max-w-md w-full">
+      <section className="flex flex-col items-center p-4 text-center max-w-md w-full ">
+        <div className="w-full flex items-center justify-start mb-4 absolute top-4 left-4">
+          <button
+            onClick={() => router.push("/")}
+            className="w-10 h-10 flex items-center justify-center bg-white hover:bg-white/80 rounded-full shadow-lg transition-all duration-300 z-50"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="w-6 h-6 text-[#095693]"
+            >
+              <path
+                fillRule="evenodd"
+                d="M11.03 3.97a.75.75 0 0 1 0 1.06l-6.22 6.22H21a.75.75 0 0 1 0 1.5H4.81l6.22 6.22a.75.75 0 1 1-1.06 1.06l-7.5-7.5a.75.75 0 0 1 0-1.06l7.5-7.5a.75.75 0 0 1 1.06 0Z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="flex items-center justify-center text-2xl font-bold text-center text-black mb-4"
+          className="flex items-center justify-center text-2xl font-bold text-center text-white mb-4"
         >
-          <span className="mx-2">Registration Form</span>
+          <span className="mx-2 uppercase">Registration</span>
         </motion.h1>
 
         <motion.form
@@ -222,7 +246,7 @@ export default function Contact() {
           <div className="mb-4 space-y-4">
             {/* Full Name */}
             <motion.div whileFocus={{ scale: 1.02 }}>
-              <label className="block text-sm font-semibold text-start text-black">
+              <label className="block text-sm font-semibold text-start text-white">
                 Full name <span className="text-red-500">*</span>
               </label>
               <input
@@ -231,14 +255,14 @@ export default function Contact() {
                 value={form.fullName}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 mt-2 border rounded-full outline-none focus:ring-2 focus:ring-black/20 border-black/40 bg-transparent text-black"
+                className="w-full px-4 py-3 mt-2 border rounded-full outline-none focus:ring-2 focus:ring-white/40 border-white/40 bg-transparent text-white"
                 placeholder="Enter your full name"
               />
             </motion.div>
 
             {/* Email */}
             <motion.div whileFocus={{ scale: 1.02 }}>
-              <label className="block text-sm font-semibold text-start text-black">
+              <label className="block text-sm font-semibold text-start text-white">
                 Email <span className="text-red-500">*</span>
               </label>
               <input
@@ -248,7 +272,7 @@ export default function Contact() {
                 value={form.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 mt-2 border rounded-full outline-none focus:ring-2 focus:ring-black/20 border-black/40 bg-transparent text-black"
+                className="w-full px-4 py-3 mt-2 border rounded-full outline-none focus:ring-2 focus:ring-white/40 border-white/40 bg-transparent text-white"
                 placeholder="Enter your email"
               />
             </motion.div>
@@ -256,7 +280,7 @@ export default function Contact() {
 
           {/* Phone */}
           <motion.div whileFocus={{ scale: 1.02 }} className="mb-4">
-            <label className="block mb-2 text-sm font-semibold text-start text-black">
+            <label className="block mb-2 text-sm font-semibold text-start text-white">
               Phone number <span className="text-red-500">*</span>
             </label>
 
@@ -268,7 +292,7 @@ export default function Contact() {
               countrySelectProps={{ disabled: true }}
               value={form.phoneNumber}
               onChange={handlePhoneChange}
-              className="w-full px-4 py-2 border rounded-full outline-none focus-within:ring-2 focus-within:ring-black/20 border-black/40 bg-transparent text-black"
+              className="w-full px-4 py-2.5 border rounded-full outline-none focus-within:ring-2 focus-within:ring-white/40 border-white/40 bg-transparent text-white"
               placeholder="Enter your phone number"
               style={
                 {
@@ -288,10 +312,10 @@ export default function Contact() {
               scale: isFormValid && !loading && cooldown === 0 ? 0.95 : 1,
             }}
             transition={{ type: "spring", stiffness: 200, damping: 10 }}
-            className={`w-full py-3 font-semibold text-white rounded-3xl transition-colors mt-4 ${
+            className={`w-full py-3 font-semibold rounded-3xl transition-colors mt-4 ${
               !isFormValid || loading || cooldown > 0
-                ? "bg-neutral-300 cursor-not-allowed"
-                : "bg-[#0F75BC]"
+                ? "bg-[#0F75BC]/20 text-white/40 cursor-not-allowed"
+                : "bg-[#0F75BC] text-white"
             }`}
             disabled={!isFormValid || loading || cooldown > 0}
           >
@@ -308,7 +332,7 @@ export default function Contact() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-3"
         >
           <motion.div
             initial={{ y: 20, scale: 0.98, opacity: 0 }}
@@ -317,15 +341,15 @@ export default function Contact() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="success-modal-title"
-            className="w-full max-w-md rounded-2xl bg-white p-6 text-center shadow-2xl"
+            className="w-full max-w-md rounded-2xl bg-white/20 backdrop-blur-xs border border-white/40 p-6 text-center shadow-2xl"
           >
             <h2
               id="success-modal-title"
-              className="text-2xl font-bold text-[#0F75BC]"
+              className="text-2xl font-bold text-white"
             >
               Thank you!
             </h2>
-            <p className="mt-3 text-sm text-neutral-700">
+            <p className="mt-3 text-sm text-white">
               Your form was submitted successfully. We appreciate your interest
               and will contact you soon.
             </p>
@@ -336,7 +360,7 @@ export default function Contact() {
                 setShowSuccessModal(false);
                 router.replace("/");
               }}
-              className="mt-6 w-full rounded-full bg-[#0F75BC] px-4 py-3 font-semibold text-white transition-colors hover:bg-[#0d67a6]"
+              className="mt-6 w-full rounded-full bg-[#0F75BC]/40 px-4 py-3 font-semibold text-white transition-colors hover:bg-[#0d67a6]"
             >
               Back to Home
             </button>

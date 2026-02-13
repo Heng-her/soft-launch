@@ -70,12 +70,9 @@ body {
   padding: 14px 38px;
   border-radius: 50px;
   color: #ffffff;
-  /* border: none; */
   cursor: pointer;
   overflow: hidden;
   transition: transform 0.1s;
-
-  /* We add more stops to make the color transition feel "rounded" as it passes */
   background: linear-gradient(
     to right,
     #0f74bc39 0%,
@@ -84,11 +81,8 @@ body {
     #0f74bc39 80%,
     #0f74bc39 100%
   );
-
-  /* Larger size (300%) makes the "Gold" section look like a moving wave */
   background-size: 300% auto;
   border: 2px solid #D4B903;
-  /* Reduced from 4s to 1.5s for a fast run */
   animation: color-flow-two 8s linear infinite;
 }
 

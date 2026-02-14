@@ -68,13 +68,18 @@ export default function Contact() {
   }, []);
 
   const isFormValid = useMemo(() => {
-    return (
-      form.fullName.trim() !== "" &&
-      form.email.trim() !== "" &&
-      form.phoneNumber.trim() !== "" &&
-      form.phoneNumber.startsWith("+855") &&
-      form.phoneNumber.length > 11
-    );
+    const fullNameValid = form.fullName.trim() !== "";
+
+    // Email and phone are optional. If provided, validate lightly.
+    const email = form.email.trim();
+    const emailValid = email === "" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    const phone = form.phoneNumber?.trim() ?? "";
+    const phoneProvided = phone !== "" && phone !== "+855";
+    const phoneValid =
+      !phoneProvided || (phone.startsWith("+855") && phone.length > 11);
+
+    return fullNameValid && emailValid && phoneValid;
   }, [form.fullName, form.email, form.phoneNumber]);
 
   const handleChange = (
@@ -263,7 +268,7 @@ export default function Contact() {
             {/* Email */}
             <motion.div whileFocus={{ scale: 1.02 }}>
               <label className="block text-sm font-semibold text-start text-white">
-                Email <span className="text-red-500">*</span>
+                Email
               </label>
               <input
                 autoComplete="off"
@@ -271,7 +276,6 @@ export default function Contact() {
                 name="email"
                 value={form.email}
                 onChange={handleChange}
-                required
                 className="w-full px-4 py-3 mt-2 border rounded-full outline-none focus:ring-2 focus:ring-white/40 border-white/40 bg-transparent text-white"
                 placeholder="Enter your email"
               />
@@ -281,7 +285,7 @@ export default function Contact() {
           {/* Phone */}
           <motion.div whileFocus={{ scale: 1.02 }} className="mb-4">
             <label className="block mb-2 text-sm font-semibold text-start text-white">
-              Phone number <span className="text-red-500">*</span>
+              Phone number
             </label>
 
             <PhoneInput
@@ -323,7 +327,7 @@ export default function Contact() {
               ? "Sending..."
               : cooldown > 0
                 ? `Please wait ${cooldown}s`
-                : "Send message"}
+                : "Submit"}
           </motion.button>
         </motion.form>
       </section>

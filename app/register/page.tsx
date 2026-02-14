@@ -39,7 +39,7 @@ function getCooldownSecondsFromResponse(
 
 type ContactForm = {
   fullName: string;
-  email: string;
+  company: string;
   phoneNumber: string;
 };
 
@@ -48,7 +48,7 @@ export default function Contact() {
 
   const [form, setForm] = useState<ContactForm>({
     fullName: "",
-    email: "",
+    company: "",
     phoneNumber: "+855",
   });
 
@@ -70,17 +70,17 @@ export default function Contact() {
   const isFormValid = useMemo(() => {
     const fullNameValid = form.fullName.trim() !== "";
 
-    // Email and phone are optional. If provided, validate lightly.
-    const email = form.email.trim();
-    const emailValid = email === "" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    // Company and phone are optional. If provided, validate lightly.
+    const company = form.company.trim();
+    const companyValid = company.length <= 254; // optional, max length
 
     const phone = form.phoneNumber?.trim() ?? "";
     const phoneProvided = phone !== "" && phone !== "+855";
     const phoneValid =
       !phoneProvided || (phone.startsWith("+855") && phone.length > 11);
 
-    return fullNameValid && emailValid && phoneValid;
-  }, [form.fullName, form.email, form.phoneNumber]);
+    return fullNameValid && companyValid && phoneValid;
+  }, [form.fullName, form.company, form.phoneNumber]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -165,7 +165,7 @@ export default function Contact() {
 
         setForm({
           fullName: "",
-          email: "",
+          company: "",
           phoneNumber: "+855",
         });
 
@@ -268,16 +268,16 @@ export default function Contact() {
             {/* Email */}
             <motion.div whileFocus={{ scale: 1.02 }}>
               <label className="block text-sm font-semibold text-start text-white">
-                Email
+                Company <span className="text-sm text-slate-300 font-light">(optional)</span>
               </label>
               <input
                 autoComplete="off"
-                type="email"
-                name="email"
-                value={form.email}
+                type="text"
+                name="company"
+                value={form.company}
                 onChange={handleChange}
                 className="w-full px-4 py-3 mt-2 border rounded-full outline-none focus:ring-2 focus:ring-white/40 border-white/40 bg-transparent text-white"
-                placeholder="Enter your email"
+                placeholder="Enter your company (optional)"
               />
             </motion.div>
           </div>
@@ -285,7 +285,7 @@ export default function Contact() {
           {/* Phone */}
           <motion.div whileFocus={{ scale: 1.02 }} className="mb-4">
             <label className="block mb-2 text-sm font-semibold text-start text-white">
-              Phone number
+              Phone number <span className="text-sm text-slate-300 font-light">(optional)</span>
             </label>
 
             <PhoneInput
@@ -362,11 +362,11 @@ export default function Contact() {
               type="button"
               onClick={() => {
                 setShowSuccessModal(false);
-                router.replace("/");
+                router.replace("/agenda");
               }}
-              className="mt-6 w-full rounded-full bg-[#0F75BC]/40 px-4 py-3 font-semibold text-white transition-colors hover:bg-[#0d67a6]"
+              className="mt-6 w-full rounded-full bg-[#0F75BC]/40 px-4 border border-[#0F75BC] py-3 font-semibold uppercase text-white"
             >
-              Back to Home
+              View Agenda
             </button>
           </motion.div>
         </motion.div>

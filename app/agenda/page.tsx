@@ -5,7 +5,14 @@ import { useRouter } from "next/navigation";
 
 export default function Agenda() {
   const router = useRouter();
+  const handleBack = () => {
+    try {
+      router.push("/");
+    } catch (error) {
+      console.error("Navigation error:", error);
+    }
 
+  }
   return (
     <div className="relative min-h-screen overflow-hidden">
       {/* Background Video */}
@@ -25,7 +32,7 @@ export default function Agenda() {
 
       {/* Back Button Top-Left */}
       <button
-        onClick={() => router.push("/")}
+        onClick={() => handleBack()}
         className="absolute top-4 left-4 w-10 h-10 flex items-center justify-center bg-white hover:bg-white/80 rounded-full shadow-lg transition-all duration-300 z-50" >
         <svg
           xmlns="http://www.w3.org/2000/svg"

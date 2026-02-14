@@ -84,8 +84,8 @@ export default function Home() {
           </div>
 
           {/* CTA Button */}
-          <div className="flex flex-col items-center justify-center gap-y-4 w-full max-w-210!">
-            <Link href="/adenda" className="w-full">
+          <div className="flex flex-col items-center justify-center gap-y-4 w-full">
+            <Link href="/agenda" className="w-full">
               <button className="btn-2 w-full py-3.5 overflow-hidden font-semibold uppercase tracking-widest select-none">
                 <span className="relative z-10 pulse-text-two">View Agenda</span>
                 <div className="absolute inset-0 bg-white/20 -translate-x-full transition-transform duration-500 skew-x-12"></div>

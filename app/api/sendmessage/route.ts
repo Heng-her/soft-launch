@@ -34,13 +34,11 @@ let rateLimitIndexesPromise: Promise<void> | undefined;
 // ---- Validation ----
 const BodySchema = z.object({
   fullName: z.string().trim().min(2, "Full name is required").max(100),
-  email: z
+  company: z
     .string()
     .trim()
     .max(254)
-    .refine((v) => v === "" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v), {
-      message: "Invalid email address",
-    }),
+    .optional(),
   phoneNumber: z
     .string()
     .trim()
@@ -183,7 +181,7 @@ function escapeHtml(s: string): string {
 
 function buildTelegramMessage(input: {
   fullName: string;
-  email?: string;
+  company?: string;
   phoneNumber?: string;
 }): string {
   const now = new Date();
@@ -198,7 +196,7 @@ function buildTelegramMessage(input: {
   ).format(now)}`;
 
   const name = escapeHtml(input.fullName);
-  const email = input.email ? escapeHtml(input.email) : undefined;
+  const company = input.company ? escapeHtml(input.company) : undefined;
   const phone = input.phoneNumber ? escapeHtml(input.phoneNumber) : undefined;
 
   const lines: string[] = [];
@@ -207,20 +205,20 @@ function buildTelegramMessage(input: {
   lines.push("├────────────────");
   lines.push(`├ • Name    : <b>${name}</b>`);
 
-  if (email) lines.push(`├ • Email        : <b>${email}</b>`);
+  if (company) lines.push(`├ • Company      : <b>${company}</b>`);
   if (phone) lines.push(`├ • Phone Number : <b>${phone}</b>`);
 
   lines.push("├────────────────");
 
   return lines.join("\n");
-}
+} 
 
 /**
  * Send Telegram notification - non-blocking, logs errors but doesn't fail the request
  */
 async function sendTelegramNotification(
   fullName: string,
-  email?: string,
+  company?: string,
   phoneNumber?: string,
 ): Promise<{ success: boolean; error?: string }> {
   try {
@@ -231,7 +229,7 @@ async function sendTelegramNotification(
 
     const telegramText = buildTelegramMessage({
       fullName,
-      email,
+      company,
       phoneNumber,
     });
 
@@ -316,8 +314,8 @@ export async function POST(req: Request) {
     };
 
     // only include optional fields when meaningful
-    if (parsed.data.email && parsed.data.email !== "")
-      doc.email = parsed.data.email;
+    if (parsed.data.company && parsed.data.company !== "")
+      doc.company = parsed.data.company;
 
     if (
       parsed.data.phoneNumber &&
@@ -333,8 +331,8 @@ export async function POST(req: Request) {
     // Send Telegram notification (SECONDARY OPERATION - non-blocking for user)
     const telegramResult = await sendTelegramNotification(
       parsed.data.fullName,
-      parsed.data.email && parsed.data.email !== ""
-        ? parsed.data.email
+      parsed.data.company && parsed.data.company !== ""
+        ? parsed.data.company
         : undefined,
       parsed.data.phoneNumber &&
         parsed.data.phoneNumber !== "" &&

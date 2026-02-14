@@ -42,8 +42,9 @@ export default function Agenda() {
       </button>
 
       {/* Page Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen animate-scale-up">
-        <div className="relative w-full max-w-6xl h-[50vh] md:h-[60vh] lg:h-[70vh] mb-10 sm:mb-6 select-none">
+      <div className="relative z-10 flex gap-2 flex-col items-center justify-center min-h-screen animate-scale-up">
+        <p className="text-xl lg:text-3xl uppercase font-black text-white select-none">What&apos;s happening</p>
+        <div className="relative w-full max-w-6xl h-[50vh] md:h-[60vh] lg:h-[80vh] mb-10 sm:mb-6 select-none">
           <Image
             src="/3Desktop.png"
             alt="desktop"

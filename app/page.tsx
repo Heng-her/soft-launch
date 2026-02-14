@@ -94,7 +94,7 @@ export default function Home() {
             <Link href="/register" className="w-full">
               <button className="btn relative w-full py-3.5 overflow-hidden font-semibold uppercase tracking-widest select-none">
                 <span className="relative z-10 pulse-text">
-                  Join Invitation
+                  ACCEPT JOIN THE EVENT
                 </span>
                 <div className="absolute inset-0 bg-[#0F74BC]/20 -translate-x-full transition-transform duration-500 skew-x-12"></div>
               </button>

@@ -27,11 +27,22 @@ let rateLimitIndexesPromise: Promise<void> | undefined;
 
 const BodySchema = z.object({
   fullName: z.string().trim().min(2, "Full name is required").max(100),
-  email: z.string().trim().email("Invalid email address").max(254),
+  // accept empty string or a valid email (field must be present as a string)
+  email: z
+    .string()
+    .trim()
+    .max(254)
+    .refine((v) => v === "" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v), {
+      message: "Invalid email address",
+    }),
+  // accept empty string or the '+855' placeholder; if provided must be a +855 number with 8–12 digits
   phoneNumber: z
     .string()
     .trim()
-    .regex(/^\+855\d{6,12}$/, "Phone number must be a Cambodia (+855) number"),
+    .refine(
+      (v) => v === "" || v === "+855" || /^\+855\d{8,12}$/.test(v),
+      { message: "Phone number must be a Cambodia (+855) number with at least 8 digits" },
+    ),
 });
 
 function getClientIp(req: Request) {
@@ -178,12 +189,25 @@ export async function POST(req: Request) {
     }
 
     const contactRequests = db.collection("contact_requests");
-    const doc = {
-      ...parsed.data,
+    const doc: Record<string, unknown> = {
+      fullName: parsed.data.fullName,
       createdAt: new Date(),
       ipHash,
       ua,
     };
+
+    // only include optional fields when they contain meaningful values
+    if (parsed.data.email && parsed.data.email !== "") {
+      doc.email = parsed.data.email;
+    }
+
+    if (
+      parsed.data.phoneNumber &&
+      parsed.data.phoneNumber !== "" &&
+      parsed.data.phoneNumber !== "+855"
+    ) {
+      doc.phoneNumber = parsed.data.phoneNumber;
+    }
 
     await contactRequests.insertOne(doc);
 

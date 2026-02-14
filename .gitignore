@@ -11,7 +11,8 @@
 !.yarn/versions
 
 # env
-.env.local
+# .env.local
+*.env.local
 
 # testing
 /coverage

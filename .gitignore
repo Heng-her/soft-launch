@@ -41,3 +41,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Large media files
+public/bg/agenda.mp4
+public/bg/*.mp4

@@ -11,14 +11,21 @@ export default function Home() {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full opacity-20 object-cover -z-10 pointer-events-none"
+        className="absolute inset-0 w-full h-full opacity-20 object-cover -z-20 pointer-events-none"
       >
         <source src="/bg/home.mp4" type="video/mp4" />
       </video>
+      <Image
+        src="/bg/home.png"
+        alt="Background"
+        fill
+        className="object-cover -z-10 pointer-events-none"
+        priority
+      />
       <div className="absolute inset-0  bg-[#002f55] backdrop-blur-sm -z-30" />
 
       <main className="relative z-10 flex flex-col items-center justify-center md:mt-10 lg:mt-0 py-4 px-4 animate-scale-up">
-        <div className="w-full max-w-6xl flex flex-col items-center justify-center mt-12">
+        <div className="w-full max-w-6xl flex flex-col items-center justify-center mt-10">
           {/* Logos */}
           <div className="flex gap-4 items-center justify-center mb-4 md:mb-8">
             <div className="w-36 md:w-38 lg:w-38">
@@ -31,13 +38,13 @@ export default function Home() {
                 priority
               />
             </div>
-            <div className="w-36 md:w-38 lg:w-38">
+            <div className="w-48 md:w-48 lg:w-56">
               <Image
-                src="/48hr_logo.svg"
-                alt="48hr"
-                width={220}
-                height={110}
-                className="w-full h-auto object-contain"
+                src="/nita_by_vo.png"
+                alt="Nita By Vo"
+                width={280}
+                height={180}
+                className="w-full h-auto"
                 priority
               />
             </div>
@@ -48,13 +55,13 @@ export default function Home() {
 
           <div className="text-center mb-6 max-w-2xl">
             <p className="text-sm md:text-xl lg:text-2xl text-white leading-relaxed select-none">
-              You are cordially invited to unveil the unsold rooms into{" "}
+              You are cordially invited to join the networking event{" "}
               <br className="hidden md:block" />
-              the unforgettable stay by 48hr Hotel Booking.
+              “Tourism In Crisis”
             </p>
           </div>
 
-          <div className="w-full max-w-2xl flex items-center justify-between mb-8">
+          <div className="w-full max-w-3xl flex items-center justify-between mb-8">
             {/* Left - Day */}
             <div className="flex-1 mr-2 border-t-2 border-b-2 border-[#FCCD03] py-2 md:py-4">
               <p className="text-sm sm:text-lg md:text-2xl lg:text-3xl font-medium text-white text-center uppercase tracking-wide select-none">
@@ -65,10 +72,10 @@ export default function Home() {
             {/* Center - Date */}
             <div className="flex flex-col items-center justify-center text-center shrink-0 min-w-20 md:min-w-37.5 select-none">
               <p className="text-sm lg:text-md lg:-mb-5 md:text-sm tracking-[0.2em] md:tracking-[0.4em] text-white uppercase text-center">
-                February
+                May
               </p>
               <h2 className="text-6xl sm:text-2xl md:text-6xl pb-2 lg:text-9xl font-bold text-[#FCCD03] leading-none drop-shadow-lg text-center">
-                21
+                16
               </h2>
               <p className="text-sm sm:text-2xl text-white md:text-xl tracking-[0.2em] md:tracking-[0.4em] uppercase text-center mr-1">
                 2026
@@ -78,11 +85,13 @@ export default function Home() {
             {/* Right - Time */}
             <div className="flex-1 border-t-2 border-b-2 border-[#FCCD03] py-2 md:py-4 text-center">
               <p className="text-sm sm:text-lg md:text-2xl lg:text-3xl font-medium text-white text-center uppercase tracking-wide select-none">
-                6:00 PM
+                5:00 PM - 10:00 PM
               </p>
             </div>
           </div>
-
+          <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white leading-relaxed select-none text-center mb-8 uppercase tracking-widest">
+            Nita by Vo, roof top
+          </p>
           {/* CTA Button */}
           <div className="flex flex-col items-center justify-center gap-y-4 w-full max-w-210">
             <Link href="/agenda" className="w-full">

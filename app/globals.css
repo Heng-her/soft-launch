@@ -69,7 +69,7 @@ body {
   position: relative;
   padding: 14px 38px;
   border-radius: 50px;
-  color: #ffffff;
+  color: #ffa580;
   cursor: pointer;
   overflow: hidden;
   transition: transform 0.1s;
@@ -77,12 +77,12 @@ body {
     to right,
     #0f74bc39 0%,
     #0f74bc39 20%,
-    #fdde1371 50%,
+    #ffa58071 50%,
     #0f74bc39 80%,
     #0f74bc39 100%
   );
   background-size: 300% auto;
-  border: 2px solid #D4B903;
+  border: 2px solid #ffa580;
   animation: color-flow-two 8s linear infinite;
 }
 

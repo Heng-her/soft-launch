@@ -130,6 +130,11 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (form.fullName.trim().length < 5) {
+      toast.error("we required at least 5 characters");
+      return;
+    }
+
     if (cooldown > 0) {
       toast.error(
         `Please wait ${cooldown} seconds before sending another message.`,
@@ -268,7 +273,10 @@ export default function Contact() {
             {/* Email */}
             <motion.div whileFocus={{ scale: 1.02 }}>
               <label className="block text-sm font-semibold text-start text-white">
-                Company <span className="text-sm text-slate-300 font-light">(optional)</span>
+                Company{" "}
+                <span className="text-sm text-slate-300 font-light">
+                  (optional)
+                </span>
               </label>
               <input
                 autoComplete="off"
@@ -285,7 +293,10 @@ export default function Contact() {
           {/* Phone */}
           <motion.div whileFocus={{ scale: 1.02 }} className="mb-4">
             <label className="block mb-2 text-sm font-semibold text-start text-white">
-              Phone number <span className="text-sm text-slate-300 font-light">(optional)</span>
+              Phone number{" "}
+              <span className="text-sm text-slate-300 font-light">
+                (optional)
+              </span>
             </label>
 
             <PhoneInput

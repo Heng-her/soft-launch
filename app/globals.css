@@ -1,15 +1,5 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "OdenaGlamour";
-  src:
-    url("/font/OdenaGlamour-BF6625f66aead7f.woff2") format("woff2"),
-    url("/font/OdenaGlamour-BF6625f66aead7f.otf") format("opentype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   --background: #ffffff;
   --foreground: #171717;

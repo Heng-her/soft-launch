@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "48hr Hotel Booking - Soft Launch",
+  title: "Tourism In Crisis",
   description:
-    "Experience the unforgettable stay with 48hr Hotel Booking. Join us for our soft launch and be the first to explore our exclusive offers and seamless booking experience. Don't miss out on the chance to turn unsold rooms into unforgettable stays!",
+    "Tourism in Crisis A Networking event for tourism professionals. Connecting Minds and Sharping the future of tourism and travel. On May 16th 2026 at 5:00PM until 10:00PM Place Nita by VO. ",
 };
 
 export default function RootLayout({

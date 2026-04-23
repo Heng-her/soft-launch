@@ -68,10 +68,12 @@ export default function Agenda() {
         <p className="text-3xl lg:text-4xl uppercase font-bold tracking-wide text-white select-none">
           Agenda
         </p>
-        <p className="text-sm uppercase md:text-base lg:text-lg text-white max-w-3xl mt-2 select-none leading-relaxed">
+        <p className="text-sm uppercase md:text-base lg:text-[16.5px] text-white w-full max-w-4xl mt-2 select-none leading-relaxed">
           Tourism in Crisis A Networking event for tourism professionals.
-          Connecting Minds and Sharping the future of tourism and travel. On May
-          16th 2026 at 5:00PM until 10:00PM Place Nita by VO.
+          Connecting Minds and Sharping
+          <br className="hidden lg:block" />
+          the future of tourism and travel. On May 16th 2026 at 5:00PM until
+          10:00PM Place Nita by VO.
         </p>
 
         <div className="w-full max-w-4xl mx-auto my-8 overflow-hidden rounded-xl border border-white/30 bg-[#28608a]/20 backdrop-blur-sm shadow-xl">

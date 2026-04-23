@@ -131,13 +131,13 @@ export default function Contact() {
     e.preventDefault();
 
     if (form.fullName.trim().length < 5) {
-      toast.error("we required at least 5 characters");
+      toast.error("Your full name must contain a minimum of 5 characters.");
       return;
     }
 
     if (cooldown > 0) {
       toast.error(
-        `Please wait ${cooldown} seconds before sending another message.`,
+        `Please hold on for ${cooldown} more seconds before submitting again!`,
       );
       return;
     }
@@ -189,17 +189,22 @@ export default function Contact() {
           SUBMIT_LOCK_KEY,
           String(Date.now() + cooldownSeconds * 1000),
         );
-        toast.error(data.error || "Too many requests. Please try again later.");
+        toast.error(
+          data.error ||
+            "Whoa, slow down! 🏃‍♂️ Please wait a moment before trying again.",
+        );
         return;
       }
 
       toast.error(
         data.details
-          ? `${data.error || "Something went wrong."} ${data.details}`
-          : data.error || "Something went wrong.",
+          ? `Oops! We hit a snag. ${data.error || "Please try again."} ${data.details}`
+          : data.error || "Oops! Something went wrong. Please try again. 🛠️",
       );
     } catch {
-      toast.error("Network error, please try again.");
+      toast.error(
+        "Oh no! Network issue. Please check your connection and try again. 📡",
+      );
     } finally {
       setLoading(false);
     }
@@ -211,6 +216,9 @@ export default function Contact() {
         position="top-center"
         toastOptions={{
           duration: 3500,
+          error: {
+            duration: 3500,
+          },
           style: {
             borderRadius: "12px",
           },

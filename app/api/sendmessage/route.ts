@@ -34,11 +34,7 @@ let rateLimitIndexesPromise: Promise<void> | undefined;
 // ---- Validation ----
 const BodySchema = z.object({
   fullName: z.string().trim().min(2, "Full name is required").max(100),
-  company: z
-    .string()
-    .trim()
-    .max(254)
-    .optional(),
+  company: z.string().trim().max(254).optional(),
   phoneNumber: z
     .string()
     .trim()
@@ -183,8 +179,10 @@ function buildTelegramMessage(input: {
   fullName: string;
   company?: string;
   phoneNumber?: string;
+  sequenceNumber?: number;
 }): string {
   const now = new Date();
+
   const formattedTime = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()} | ${new Intl.DateTimeFormat(
     "en-US",
     {
@@ -196,22 +194,44 @@ function buildTelegramMessage(input: {
   ).format(now)}`;
 
   const name = escapeHtml(input.fullName);
-  const company = input.company ? escapeHtml(input.company) : undefined;
-  const phone = input.phoneNumber ? escapeHtml(input.phoneNumber) : undefined;
+  const company =
+    input.company && input.company.trim() !== ""
+      ? escapeHtml(input.company)
+      : null;
+
+  const phone =
+    input.phoneNumber &&
+    input.phoneNumber.trim() !== "" &&
+    input.phoneNumber !== "+855"
+      ? escapeHtml(input.phoneNumber)
+      : null;
+
+  const no = input.sequenceNumber ?? "-";
 
   const lines: string[] = [];
+
+  // Header
   lines.push(`🟢 Date: ${formattedTime}`);
   lines.push("");
+
+  // Body
   lines.push("├────────────────");
+  lines.push(`├ • No.     : <b>${no}</b>`);
   lines.push(`├ • Name    : <b>${name}</b>`);
 
-  if (company) lines.push(`├ • Company      : <b>${company}</b>`);
-  if (phone) lines.push(`├ • Phone Number : <b>${phone}</b>`);
+  // ✅ Only show if exists
+  if (company) {
+    lines.push(`├ • Company : <b>${company}</b>`);
+  }
+
+  if (phone) {
+    lines.push(`├ • Phone Number : <b>${phone}</b>`);
+  }
 
   lines.push("├────────────────");
 
   return lines.join("\n");
-} 
+}
 
 /**
  * Send Telegram notification - non-blocking, logs errors but doesn't fail the request
@@ -220,6 +240,7 @@ async function sendTelegramNotification(
   fullName: string,
   company?: string,
   phoneNumber?: string,
+  sequenceNumber?: number,
 ): Promise<{ success: boolean; error?: string }> {
   try {
     if (!BOT_TOKEN || !CHAT_ID) {
@@ -231,6 +252,7 @@ async function sendTelegramNotification(
       fullName,
       company,
       phoneNumber,
+      sequenceNumber,
     });
 
     const telegramURL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
@@ -328,6 +350,10 @@ export async function POST(req: Request) {
     const insertResult = await contactRequests.insertOne(doc);
     const insertedId = insertResult.insertedId;
 
+    const totalCount = await contactRequests
+      .countDocuments()
+      .catch(() => undefined);
+
     // Send Telegram notification (SECONDARY OPERATION - non-blocking for user)
     const telegramResult = await sendTelegramNotification(
       parsed.data.fullName,
@@ -339,6 +365,7 @@ export async function POST(req: Request) {
         parsed.data.phoneNumber !== "+855"
         ? parsed.data.phoneNumber
         : undefined,
+      totalCount,
     );
 
     // Update the document with Telegram status

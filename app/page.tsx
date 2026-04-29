@@ -56,7 +56,7 @@ export default function Home() {
           <div className="text-center mb-6 max-w-2xl">
             <p className="text-sm md:text-xl lg:text-2xl text-white leading-relaxed select-none">
               You are cordially invited to join the networking event <br />
-              “Tourism In Crisis”
+              “Siem Reap Tourism Under Pressure”
             </p>
           </div>
 

@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Tourism In Crisis",
+  title: "Siem Reap Tourism Under Pressure",
   description:
-    "Tourism in Crisis A Networking event for tourism professionals. Connecting Minds and Sharping the future of tourism and travel. On May 16th 2026 at 5:00PM until 10:00PM Place Nita by VO. ",
+    "Siem Reap Tourism Under Pressure A Networking event for tourism professionals. Connecting Minds and Sharping the future of tourism and travel. On May 16th 2026 at 5:00PM until 10:00PM Place Nita by VO. ",
 };
 
 export default function RootLayout({

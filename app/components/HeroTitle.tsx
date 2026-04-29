@@ -16,7 +16,7 @@ export default function HeroTitle() {
         showHeading ? "opacity-100" : "opacity-0"
       }`}
     >
-      TOURISM IN CRISIS
+      Siem Reap Tourism <br className="sm:hidden"/> Under Pressure
     </h1>
   );
 }
